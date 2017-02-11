@@ -1,0 +1,24 @@
+{
+  "name": "gdg-offline",
+  "description": "Codelab para aplicación TodoList offline",
+  "main": "index.html",
+  "authors": [
+    "jn6h"
+  ],
+  "license": "ISC",
+  "keywords": [
+    "gdg",
+    "html5"
+  ],
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

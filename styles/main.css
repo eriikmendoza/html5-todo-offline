@@ -1,0 +1,10 @@
+
+#todo-input {
+  display: inline-block;
+  width: auto;
+  vertical-align: middle;
+}
+
+#todo-list {
+    margin-top: 20px;
+}
