@@ -11,9 +11,9 @@ if ('webkitIndexedDB' in window) {
 
 function TodoList() {
     // @TODO Obtener mediate el querySelector(): #todo-input, #todo-button y #todo-list
-    this._todoInput = ;
-    this._todoButton = ;
-    this._todoList = ;
+    this._todoInput = document.querySelector('#todo-input');
+    this._todoButton = document.querySelector('#todo-button');
+    this._todoList = document.querySelector('#todo-list');
 
     // Gestionar interacción del usuario
     this._todoButton.addEventListener('click', this._handleTodoButtonEvent.bind(this))
@@ -32,7 +32,7 @@ TodoList.prototype.open = function() {
     var _self = this;
 
     /* @TODO: Inicializa una base de datos indexedDB */
-    var request = ;
+    var request = indexedDB.open(TodoList.DB_NAME, TodoList.DB_VERSION);
 
     request.onupgradeneeded = function(e) {
         var db = e.target.result;
@@ -49,6 +49,7 @@ TodoList.prototype.open = function() {
         _self.db = e.target.result;
 
         /* @TODO Obtener todos los todoItems */
+        _self.getAllTodoItems();
     };
 
     request.onerror = _self.onerror.bind(this);
@@ -66,10 +67,12 @@ TodoList.prototype.addTodo = function(todoText) {
     };
 
     /* @TODO almacena en la base de datos el todo */
+    var request = store.put(data);
 
     request.onsuccess = function(e) {
 
         /* @TODO Obtener todos los todoItems */
+        _self.getAllTodoItems();
     };
 
     request.onerror = function(e) {
@@ -84,6 +87,7 @@ TodoList.prototype.deleteTodo = function(id) {
         store = trans.objectStore(TodoList.DB_STORE);
 
     /* @TODO elimina de la base de datos el todo */
+    var request = store.delete(id);
 
     request.onsuccess = function(e) {
         _self.getAllTodoItems();
@@ -132,6 +136,7 @@ TodoList.prototype._renderTodo = function(todo) {
 
     newItem.addEventListener('click', function(e) {
         /* @TODO elimina de la base de datos el todo seleccionado */
+        _self.deleteTodo(todo.timeStamp);
     }, false);
 
     this._todoList.appendChild(newItem);
@@ -146,4 +151,5 @@ TodoList.prototype._handleTodoButtonEvent = function(e) {
 
 document.addEventListener('DOMContentLoaded', function () {
     /* @TODO Inicializa la TodoList */
+    new TodoList().open();
 });

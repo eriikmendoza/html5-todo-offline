@@ -1,5 +1,8 @@
 CACHE MANIFEST
 # @TODO(developer): Incluye los archivos que serán almacenados en cache
+./bower_components/bootstrap/dist/css/bootstrap.css
+./styles/main.css
+./js/todo.js
 
 NETWORK:
 *
